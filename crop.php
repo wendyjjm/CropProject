@@ -54,7 +54,11 @@
     	//prevent sql injection
 		$sql = mysql_real_escape_string($sql);
 		$result = mysql_query($sql);
-		display($result);
+		if($result!=false)
+		{
+			display($result);			
+		}
+
 	}
 
 	function display($result)
