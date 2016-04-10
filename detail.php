@@ -3,54 +3,18 @@
 
 	include_once "connect.php";
 	
-	$optionseng =array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
-	
-	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-	$currPage = 0;
-	if(isset($_REQUEST['submit']))
-	{
+	$id = $_REQUEST['id'];
+	if($id != ""){
 		//if user click search
-		$sql = "SELECT id,crop,germplasm,family,genericname,specificname FROM BasicInfo ";
-		$conditions = "WHERE ";
-		for($i = 0; $i< 36;$i++)
-		{
-
-			if($_REQUEST[$optionseng[$i]]!="")
-			{
-				$conditions .= "`".$optionseng[$i]."`";
-				$conditions .= " = ";
-				$conditions .= "'".$_REQUEST[$optionseng[$i]]."'";
-				$conditions .= " and ";
-			}
-		}
-		if($conditions != "WHERE "){
-			$sql.=$conditions;
-		}else{
-			$sql.="LIMIT 10";
-		}
-
-		if($_REQUEST['start']!=""){
-			$currPage = $_REQUEST['start'];
-			$sql.=" OFFSET ".$_REQUEST['start'];
-		}
-		$pos = strrpos($sql, "and");
+		$sql = "SELECT * FROM BasicInfo WHERE `id`='".$id."'";
 		
-		if($pos !== false)
-    	{
-        	$sql = substr_replace($sql,"", $pos, 3);
-    	}
     	//prevent sql injection
 /* 		$sql = mysql_real_escape_string($sql); */
 		mysql_query("SET NAMES 'utf8'");
 		mysql_query("SET CHARACTER SET utf8");
 		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 		$result = mysql_query($sql);
-	}else{
-		$sql = "SELECT id,crop,germplasm,family,genericname,specificname FROM BasicInfo LIMIT 10";
-		mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET CHARACTER SET utf8");
-		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
-		$result = mysql_query($sql);
+		$data = mysql_fetch_array($result);
 	}
 ?>
 
@@ -106,28 +70,16 @@
 	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	          <h1 class="page-header">抗旱数据库查询</h1>
 		
-	          <h3 class="sub-header">查询条件</h2>
-	          
-	          <form action="crop.php" method="get"
-						id='crop-query-form' role='form'>
-				<div class='input-group' id='basic-query-conditions'></div>
-				
-			    <div class="collapse" id="advancedquerycondition"></div>
-				
-				<div class="col-sm-12 text-center">
-					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedquerycondition">更多条件</button>
-					<button type="submit" class="btn btn-info" name="submit">搜索</button>
-				</div>
-			  </form>
-			  
-			  <!--Infobox -->
-		        <h3 class="sub-header">查询结果</h2>
-		        <h4><?php echo $sql;?></h4>
+	          	<h3 class="sub-header">详细信息</h2>
+	          	<h4><?php echo $sql;?></h4>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
 						data-parent="#accordion" data-target="#collapseInfoBox">
 						<h4 class="panel-title">
-							<span class="glyphicon glyphicon-search"></span>查询结果
+							<span class="glyphicon glyphicon-search"></span>
+							<?php 
+								echo $data['crop'];
+							?>
 						</h4>
 					</div>
 					<div id="collapseInfoBox" class="panel-collapse collapse in">
@@ -138,7 +90,7 @@
 									<?php 
 									if($result!=false)
 									{
-										display($result);			
+										display($data);			
 									}
 									?>
 	
@@ -148,15 +100,6 @@
 						</div>
 					</div>
 				</div>
-				<ul class="pager">
-				<?php
-					$prevPage = $_REQUEST['start']-10;
-					$prevPage = $prevPage>0?$prevPage:0;
-					$nextPage = $_REQUEST['start']+10;
-					echo "<li class=\"previous\"><a href=\"".$actual_link."?start=".$prevPage;."\">上一页</a></li>";
-					echo "<li class=\"next\"><a href=\"".$actual_link."?start=".$nextPage;."\">下一页</a></li>";
-				?>
-				</ul>
 	        </div>
 	        <!-- end main page -->
 	      </div>
@@ -176,18 +119,12 @@
 </html>
 
 <?php
-	function display($result)
+	function display($data)
 	{
-		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","详细信息","抗旱鉴定结果");
-		echo "<thead><tr>";
-		for($i = 0; $i< count($option); $i++)
-		{
-			echo "<th class='text-center'>".$option[$i]."</th>";
+		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","原产地","原产省","原产国","来源地","资源类型","主要特性","生育周期","系谱","选育单位","育成年分","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","图像","抗旱鉴定结果","保存单位","库编号","圃编号","引种号","采集号","保存资源类型","保存方式","实物状态","共享方式","获取途径");
+		$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
+		for($i=0; $i<count($optionseng); $i++){
+    		echo "<tr><td class=\"col-xs-3\">".$option[$i]."</td><td class=\"col-xs-9\">".$data[$optionseng[$i]]."</td><td>";	
 		}
-		echo "</tr></thead>";
-		while($row = mysql_fetch_array($result))
-    	{
-    		echo "<tr><td>".$row['id']."</td><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['family']."</td><td>".$row['genericname']."</td><td>".$row['specificname']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
-    	}
 	}
 ?>

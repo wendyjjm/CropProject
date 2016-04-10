@@ -8,6 +8,7 @@
 	{
 		die('Connection Failed'.mysql_error());
 	}
+
 	//check if database already exist, if so, skip the following parts
 	$db_selected = mysql_select_db('DroughtResistingDB',$con);
     if(!$db_selected)
@@ -17,9 +18,6 @@
 
     function initialize($con)
     {
-    	mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET CHARACTER SET utf8");
-		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
     	createDB($con);
     	createBasicInfoTable($con);
     	createTestResultTable($con);
@@ -39,8 +37,8 @@
     	mysql_select_db("DroughtResistingDB",$con);
 		$optionseng =array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
 
-		$sql ="CREATE TABLE BasicInfo ( ";
-		for($x=0;$x<13;$x++)
+		$sql ="CREATE TABLE BasicInfo ( id int NOT NULL,";
+		for($x=1;$x<13;$x++)
 		{
 			$sql .= $optionseng[$x];
 			$sql .= " varchar(30) NOT NULL,";
@@ -71,12 +69,11 @@
 		for($x=31;$x<36;$x++)
 		{
 			$sql .= $optionseng[$x];
-			$sql .=" varchar(30) NOT NULL,";
+			$sql.=" varchar(30) NOT NULL,";
 		}
 		$sql.="PRIMARY KEY(id) )";
 
 		mysql_query($sql,$con);
-		
     }
 
     function createTestResultTable($con)
