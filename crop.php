@@ -85,7 +85,7 @@
 	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	          <h1 class="page-header">抗旱数据库查询</h1>
 		
-	          <h2 class="sub-header">查询条件</h2>
+	          <h3 class="sub-header">查询条件</h2>
 	          
 	          <form action="crop.php" method="get"
 						id='crop-query-form' role='form'>
@@ -94,13 +94,13 @@
 			    <div class="collapse" id="advancedquerycondition"></div>
 				
 				<div class="col-sm-12 text-center">
-					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#advancedquerycondition">更多条件</button>
-					<button type="submit" class="btn btn-default" name="submit">搜索</button>
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedquerycondition">更多条件</button>
+					<button type="submit" class="btn btn-info" name="submit">搜索</button>
 				</div>
 			  </form>
 			  
 			  <!--Infobox -->
-		        <h2 class="sub-header">查询结果</h2>
+		        <h3 class="sub-header">查询结果</h2>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
 						data-parent="#accordion" data-target="#collapseInfoBox">
@@ -119,8 +119,6 @@
 										display($result);			
 									}
 									?>
-										<td class="col-xs-3">A</td>
-										<td class="col-xs-9">B</td>
 	
 									</tbody>
 								</table>
@@ -149,14 +147,16 @@
 <?php
 	function display($result)
 	{
-		echo "<div class='container-fluid'>";
-		echo "<table class='table table-striped'>";
-		echo "<thead><tr><th>序号</th><th>作物名称</th><th>种质名称</th><th>科名</th><th>属名</th><th>种名或亚种名</th><th>详细信息</th><th>抗旱鉴定结果</th></tr></thead>";
+		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","详细信息","抗旱鉴定结果");
+		echo "<thead><tr>";
+		for($i = 0; $i< count($option); $i++)
+		{
+			echo "<th class='text-center'>".$option[$i]."</th>";
+		}
+		echo "</tr></thead>";
 		while($row = mysql_fetch_array($result))
     	{
     		echo "<tr><td>".$row['id']."</td><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['family']."</td><td>".$row['genericname']."</td><td>".$row['specificname']."</td><td>详细信息</td><td>鉴定结果</td></tr>";
     	}
-		echo "</table>";
-		echo "</div>";
 	}
 ?>
