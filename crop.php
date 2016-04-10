@@ -26,6 +26,9 @@
     	}
     	//prevent sql injection
 		$sql = mysql_real_escape_string($sql);
+		mysql_query("SET NAMES 'utf8'");
+		mysql_query("SET CHARACTER SET utf8");
+		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 		$result = mysql_query($sql);
 	}
 ?>
