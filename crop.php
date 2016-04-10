@@ -2,34 +2,7 @@
 <?php 
 
 	include_once "connect.php";
-?>
-
-
-<html lang="en">
-	<head>
-		<meta charset = "utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  		<script src="js/crop.js"></script>
-	</head>
-	<body>
-		<div class="container-fluid">
-  			<div class="page-header text-center">
-    			<h1>请输入查询条件</h1>      
-  			</div>
-		</div>
-		<div class="container-fluid jumbotron">
-				<form id="crop-query" class="form-inline" role="form" action="crop.php">
-				</form>
-		</div>
-	</body>
-</html>
-
-<?php
-
-	$options = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","原产地","原产省","原产国","来源地","资源类型","主要特性","生育周期","系谱","选育单位","育成年分","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","图像","抗旱鉴定结果","保存单位","库编号","圃编号","引种号","采集号","保存资源类型","保存方式","实物状态","共享方式","获取途径");
+	
 	$optionseng =array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
 	if(isset($_REQUEST['submit']))
 	{
@@ -54,13 +27,123 @@
     	//prevent sql injection
 		$sql = mysql_real_escape_string($sql);
 		$result = mysql_query($sql);
-		if($result!=false)
-		{
-			display($result);			
-		}
-
 	}
+?>
 
+
+<html lang="cn">
+	<head>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap core CSS -->
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="css/dashboard.css" rel="stylesheet">
+  		<title>抗旱作物数据库</title>
+  		
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">抗旱作物数据库</a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="#">数据库</a></li>
+	            <li><a href="#">登陆</a></li>
+	            <li><a href="#">帮助</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
+	    
+	    <!-- container-fluid -->
+	    <div class="container-fluid">
+	      <!-- row -->
+	      <div class="row">
+	      	<!-- sider page -->
+	        <div class="col-sm-3 col-md-2 sidebar">
+	          <ul class="nav nav-sidebar">
+	          	<li><a href="#">项目简介</a></li>
+	            <li class="active"><a href="#">数据库查询 <span class="sr-only">(current)</span></a></li>
+	            <li><a href="#">联系我们</a></li>
+	          </ul>
+	        </div>
+	        <!-- end sider page -->
+	        
+	        <!-- main page -->
+	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	          <h1 class="page-header">抗旱数据库查询</h1>
+		
+	          <h2 class="sub-header">查询条件</h2>
+	          
+	          <form action="crop.php" method="get"
+						id='crop-query-form' role='form'>
+				<div class='input-group' id='basic-query-conditions'></div>
+				
+			    <div class="collapse" id="advancedquerycondition"></div>
+				
+				<div class="col-sm-12 text-center">
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#advancedquerycondition">更多条件</button>
+					<button type="submit" class="btn btn-default" name="submit">搜索</button>
+				</div>
+			  </form>
+			  
+			  <!--Infobox -->
+		        <h2 class="sub-header">查询结果</h2>
+				<div class="panel panel-default">
+					<div class="panel-heading" data-toggle="collapse"
+						data-parent="#accordion" data-target="#collapseInfoBox">
+						<h4 class="panel-title">
+							<span class="glyphicon glyphicon-search"></span>查询结果
+						</h4>
+					</div>
+					<div id="collapseInfoBox" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover table-striped text-center">
+									<tbody>
+									<?php 
+									if($result!=false)
+									{
+										display($result);			
+									}
+									?>
+										<td class="col-xs-3">A</td>
+										<td class="col-xs-9">B</td>
+	
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+	        </div>
+	        <!-- end main page -->
+	      </div>
+	      <!-- end row -->
+	    </div>
+	    <!-- end container-fluid -->
+	    
+	</body>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/crop.js"></script>
+</html>
+
+<?php
 	function display($result)
 	{
 		echo "<div class='container-fluid'>";
