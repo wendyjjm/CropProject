@@ -31,7 +31,7 @@
 
 		if($_REQUEST['start']!=""){
 			$currPage = $_REQUEST['start'];
-			$sql.=" OFFSET ".$_REQUEST['start'];
+			$sql.=" OFFSET ".$currPage;
 		}
 		$pos = strrpos($sql, "and");
 		
@@ -150,11 +150,11 @@
 				</div>
 				<ul class="pager">
 				<?php
-					$prevPage = $_REQUEST['start']-10;
+					$prevPage = $currPage-10;
 					$prevPage = $prevPage>0?$prevPage:0;
-					$nextPage = $_REQUEST['start']+10;
-					echo "<li class=\"previous\"><a href=\"".$actual_link."?start=".$prevPage;."\">上一页</a></li>";
-					echo "<li class=\"next\"><a href=\"".$actual_link."?start=".$nextPage;."\">下一页</a></li>";
+					$nextPage = $currPage+10;
+					echo "<li class=\"previous\"><a href=\"".$actual_link."&start=".$prevPage."\">上一页</a></li>";
+					echo "<li class=\"next\"><a href=\"".$actual_link."&start=".$nextPage."\">下一页</a></li>";
 				?>
 				</ul>
 	        </div>
