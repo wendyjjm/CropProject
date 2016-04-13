@@ -11,7 +11,7 @@
 
 	//check if database already exist, if so, skip the following parts
 	$db_selected = mysql_select_db('DroughtResistingDB',$con);
-    if(!$db_selected)
+    /*if(!$db_selected)
     {
 		initialize($con);	
     }
@@ -92,7 +92,7 @@
     	$sql .= " varchar(10) )";
 
 		mysql_query($sql,$con);
-    }
+    }*/
 
 	
 ?>

@@ -40,7 +40,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="#">抗旱作物数据库</a>
+	          <a class="navbar-brand" href="#">云南粮经作物种质资源抗旱鉴定评价信息共享数据库</a>
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
@@ -68,10 +68,9 @@
 	        
 	        <!-- main page -->
 	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	          <h1 class="page-header">抗旱数据库查询</h1>
+	          <h1 class="page-header">数据库查询</h1>
 		
 	          	<h3 class="sub-header">详细信息</h2>
-	          	<h4><?php echo $sql;?></h4>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
 						data-parent="#accordion" data-target="#collapseInfoBox">
@@ -121,10 +120,10 @@
 <?php
 	function display($data)
 	{
-		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","原产地","原产省","原产国","来源地","资源类型","主要特性","生育周期","系谱","选育单位","育成年分","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","图像","抗旱鉴定结果","保存单位","库编号","圃编号","引种号","采集号","保存资源类型","保存方式","实物状态","共享方式","获取途径");
-		$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
+		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","原产地","原产省","原产国","来源地","资源类型","主要特性","生育周期","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","抗旱鉴定结果","保存单位","保存资源类型","保存方式","实物状态","共享方式","获取途径","联系方式");
+		$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","testresult","depositunit","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod","contact");
 		for($i=0; $i<count($optionseng); $i++){
-    		echo "<tr><td class=\"col-xs-3\">".$option[$i]."</td><td class=\"col-xs-9\">".$data[$optionseng[$i]]."</td><td>";	
+    		echo "<tr><td class=\"col-xs-3\">".$option[$i]."</td><td class=\"col-xs-9\">".$data[$optionseng[$i]]."</td></tr>";	
 		}
 	}
 ?>

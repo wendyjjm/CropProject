@@ -3,8 +3,7 @@
 
 	include_once "connect.php";
 	
-	$optionseng =array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
-	
+    $optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","testresult","depositunit","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");	
 	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	$currPage = 0;
 	if(isset($_REQUEST['submit']))
@@ -12,7 +11,7 @@
 		//if user click search
 		$sql = "SELECT id,crop,germplasm,family,genericname,specificname FROM BasicInfo ";
 		$conditions = "WHERE ";
-		for($i = 0; $i< 36;$i++)
+		for($i = 0; $i<count($optionseng);$i++)
 		{
 
 			if($_REQUEST[$optionseng[$i]]!="")
@@ -28,11 +27,20 @@
 		}else{
 			$sql.="LIMIT 10";
 		}
+		$pos = strrpos($actual_link, "=");
+		if($pos==(strlen($actual_link)-1))
+		{
+		}
+		else
+		{
+			$currPage = $_REQUEST['start'];
+			$sql.=" OFFSET ".$currPage;			
+		}
 
-		if($_REQUEST['start']!=""){
+		/*if($_REQUEST['start']!=""){
 			$currPage = $_REQUEST['start'];
 			$sql.=" OFFSET ".$currPage;
-		}
+		}*/
 		$pos = strrpos($sql, "and");
 		
 		if($pos !== false)
@@ -76,7 +84,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="#">抗旱作物数据库</a>
+	          <a class="navbar-brand" href="#">云南粮经作物种质资源抗旱鉴定评价信息共享数据库</a>
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
@@ -104,7 +112,7 @@
 	        
 	        <!-- main page -->
 	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	          <h1 class="page-header">抗旱数据库查询</h1>
+	          <h1 class="page-header">数据库查询</h1>
 		
 	          <h3 class="sub-header">查询条件</h2>
 	          
@@ -122,7 +130,6 @@
 			  
 			  <!--Infobox -->
 		        <h3 class="sub-header">查询结果</h2>
-		        <h4><?php echo $sql;?></h4>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
 						data-parent="#accordion" data-target="#collapseInfoBox">
