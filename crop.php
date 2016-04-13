@@ -59,6 +59,7 @@
 		mysql_query("SET CHARACTER SET utf8");
 		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 		$result = mysql_query($sql);
+		$actual_link=$actual_link."?";
 	}
 ?>
 
@@ -72,7 +73,6 @@
 		<!-- Custom styles for this template -->
 		<link href="css/dashboard.css" rel="stylesheet">
   		<title>抗旱作物数据库</title>
-  		
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
