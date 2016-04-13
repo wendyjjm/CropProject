@@ -54,7 +54,7 @@
 		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 		$result = mysql_query($sql);
 	}else{
-		$sql = "SELECT id,crop,germplasm,family,genericname,specificname FROM BasicInfo LIMIT 10";
+		$sql = "SELECT id,crop,germplasm,resoucetype,testlocation,testresult,collectmethod FROM BasicInfo LIMIT 10";
 		mysql_query("SET NAMES 'utf8'");
 		mysql_query("SET CHARACTER SET utf8");
 		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
@@ -89,7 +89,7 @@
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="#">数据库</a></li>
-	            <li><a href="#">登陆</a></li>
+	            <li><a href="#">登录</a></li>
 	            <li><a href="#">帮助</a></li>
 	          </ul>
 	        </div>
@@ -185,7 +185,7 @@
 <?php
 	function display($result)
 	{
-		$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","详细信息","抗旱鉴定结果");
+		$option = array("作物名称","种质名称","资源类型","鉴定试验地点","抗旱性鉴定结果","获取途径","详细信息","抗旱鉴定结果");
 		echo "<thead><tr>";
 		for($i = 0; $i< count($option); $i++)
 		{
@@ -194,7 +194,7 @@
 		echo "</tr></thead>";
 		while($row = mysql_fetch_array($result))
     	{
-    		echo "<tr><td>".$row['id']."</td><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['family']."</td><td>".$row['genericname']."</td><td>".$row['specificname']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
+    		echo "<tr><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['collectmethod']."</td><td>".$row['resoucetype']."</td><td>".$row['testlocation']."</td><td>".$row['testresult']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
     	}
 	}
 ?>

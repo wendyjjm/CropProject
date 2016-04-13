@@ -45,7 +45,7 @@
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="#">数据库</a></li>
-	            <li><a href="#">登陆</a></li>
+	            <li><a href="#">登录</a></li>
 	            <li><a href="#">帮助</a></li>
 	          </ul>
 	        </div>
