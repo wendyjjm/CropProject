@@ -9,7 +9,7 @@
 	if(isset($_REQUEST['submit']))
 	{
 		//if user click search
-		$sql = "SELECT id,crop,germplasm,family,genericname,specificname FROM BasicInfo ";
+		$sql = "SELECT id,crop,germplasm,resoucetype,testlocation,testresult,collectmethod FROM BasicInfo ";
 		$conditions = "WHERE ";
 		for($i = 0; $i<count($optionseng);$i++)
 		{
