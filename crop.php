@@ -73,6 +73,7 @@
 		<!-- Custom styles for this template -->
 		<link href="css/dashboard.css" rel="stylesheet">
   		<title>抗旱作物数据库</title>
+  		
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
