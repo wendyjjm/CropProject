@@ -3,6 +3,7 @@
 
 	include_once "connect.php";
 	$id = $_REQUEST['id'];
+	$crop = $_REQUEST['crop'];
 	if($id != ""){
 		//if user click search
 
@@ -10,10 +11,45 @@
 		
     	//prevent sql injection
 /* 		$sql = mysql_real_escape_string($sql); */
+		$result = "";
+		$type = "";
 		mysql_query("SET NAMES 'utf8'");
 		mysql_query("SET CHARACTER SET utf8");
 		mysql_query("SET SESSION collation_connection = 'utf8_unicode_ci'");
-		$sql = "SELECT * FROM shuidao WHERE `id`='".$id."'";
+		switch ($crop) {
+			case '水稻':
+				$sql = "SELECT * FROM shuidao WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$type = "shuidao";
+				break;
+			case '小麦':
+				$sql = "SELECT * FROM xiaomai WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$type = "xiaomai";
+				break;
+			case '旱稻':
+				$sql = "SELECT * FROM handao WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$type = "handao";
+				break;
+			case '油菜':
+				$sql = "SELECT * FROM youcai WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$type = "youcai";
+				break;
+			case '玉米':
+				$sql = "SELECT * FROM yumi WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$tyoe = "yumi";
+				break;
+			case '马铃薯':
+				$sql = "SELECT * FROM malingshu WHERE `id`='".$id."'";
+				$result = mysql_query($sql);
+				$type ="malingshu";
+				break;			
+
+		}
+		/*$sql = "SELECT * FROM shuidao WHERE `id`='".$id."'";
 		$result = mysql_query($sql);
 		$type = "shuidao";
 		if($result==false)
@@ -36,10 +72,16 @@
 						$sql = "SELECT * FROM yumi WHERE `id`='".$id."'";
 						$result = mysql_query($sql);
 						$type = "yumi";
+						if($result == false)
+						{
+							$sql = "SELECT * FROM malingshu WHERE `id`='".$id."'";
+							$result = mysql_query($sql);
+							$type = "malingshu";
+						}
 					}
 				}
 		    }
-		}
+		}*/
 		$data = mysql_fetch_array($result);
 	}
 ?>
@@ -170,9 +212,12 @@
 				$option = array("ID","作物名称","种质名称","抗旱性综合评价","萌发期耐旱指数","萌发期抗旱性","DS(幼苗反复干旱存活率)","苗期抗旱性","全生育期旱处理产量kg","全生育期旱处理籽粒干重kg","全生育期对照产量kg","全生育期对照籽粒干重kg","DRI(抗旱指数）","全生育期抗旱性");
 				$optionseng = array("id","crop","germplasm","zonghepingjia","mengfazhishu","mengfakanghan","ds","miaoqikanghan","quanzhengyuchulichanliang","quanshengyuziliganzhong","quanshengyuduizhao","quanshengyuziliduizhao","dri","quanshengyukanghanxing");
 				break;
+			case "malingshu":
+				$option = array("ID","作物名称","种质名称","株高cm","样品植株重量(鲜重克)","样品植株重量(干重克)","样品根重量(鲜重克)","样品根重量(干重克)","提根性kg","三个重复的平均出苗率%","单株结薯(个)","平均单薯重g","大中薯率%","小薯率（％）","晚疫病(第一测)","晚疫病(第二测)","晚疫病(第三测)","晚疫病(第四测)","折合单产(㎏/667㎡)","较对照增产%","抗旱位次");
+				$optionseng = array("id","crop","germplasm","zhugao","yangpinxianzhong","yangpinganzhong","yangpingenxianzhong","yangpingenganzhong","tigenxing","pingjunchumiao","danzhujieshu","pingjundanshuzhong","dazhongshulv","xiaoshulv","wanyibingyi","wanyibinger","wanyibingsan","wanyibingsi","zhegedanchan","jiaoduijiaozengchan","kanghanweici");
+				break;
+
 		}	
-		//$option = array("序号","作物名称","种质名称","科名","属名","种名或亚种名","原产地","原产省","原产国","来源地","资源类型","主要特性","生育周期","系谱","选育单位","育成年分","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","图像","抗旱鉴定结果","保存单位","库编号","圃编号","引种号","采集号","保存资源类型","保存方式","实物状态","共享方式","获取途径");
-		//$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","familytree","breedingunit","breedyear","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","image","testresult","depositunit","libraryid","gardenid","introductionid","collectid","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");
 		for($i=0; $i<count($optionseng); $i++){
     		echo "<tr><td class=\"col-xs-3\">".$option[$i]."</td><td class=\"col-xs-9\">".$data[$optionseng[$i]]."</td><td>";	
 		}

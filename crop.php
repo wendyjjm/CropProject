@@ -195,7 +195,9 @@
 		echo "</tr></thead>";
 		while($row = mysql_fetch_array($result))
     	{
-    		echo "<tr><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['collectmethod']."</td><td>".$row['resoucetype']."</td><td>".$row['testlocation']."</td><td>".$row['testresult']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
+    		$crop = $row['crop'];
+
+    		echo "<tr><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['collectmethod']."</td><td>".$row['resoucetype']."</td><td>".$row['testlocation']."</td><td>".$row['testresult']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?crop=".$crop."&id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
     	}
 	}
 ?>

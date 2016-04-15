@@ -121,7 +121,7 @@
 	function display($data)
 	{
 		$option = array("ID","作物名称","种质名称","科名","属名","种名或亚种名","来源地","原产国","原产省","原产地","资源类型","主要特性","生育周期","海拔","经度","纬度","鉴定试验地点","土壤类型","生态系统类型","年均温度","年均降雨量","抗旱性鉴定结果","保存单位","保存资源类型","保存方式","实物状态","共享方式","获取途径","联系方式");
-		$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","testresult","depositunit","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod","contact");
+		$optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofcountry","originofprovince","sourcearea","resoucetype","mainfeature","growthcycle","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","testresult","depositunit","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod","contact");
 		for($i=0; $i<count($optionseng); $i++){
     		echo "<tr><td class=\"col-xs-3\">".$option[$i]."</td><td class=\"col-xs-9\">".$data[$optionseng[$i]]."</td></tr>";	
 		}
