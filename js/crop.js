@@ -9,15 +9,15 @@ function createQueryOptions(){
 	
 	var basic_condition_content = "";
 	var adv_condition_content = "";
-	for (var i=0; i<8; i++){
+	for (var i=0; i<6; i++){
 		var option = options[i];
 		var optioneng = optionseng[i];
-		basic_condition_content += '<div class = "form-group col-md-3">';
+		basic_condition_content += '<div class = "form-group col-md-4">';
 		basic_condition_content += '<label for="'+option+'">'+option+'</label>';
 		basic_condition_content += '<input type="text" class="form-control" name ="'+optioneng+'">';
 		basic_condition_content += '</div>';
 	}
-	for (var i=8; i<options.length; i++){
+	for (var i=6; i<options.length; i++){
 		var option = options[i];
 		var optioneng = optionseng[i];
 		adv_condition_content += '<div class = "form-group col-md-3">';

@@ -43,7 +43,7 @@
 		}*/
 		$pos = strrpos($sql, "and");
 		
-		if($pos !== false)
+		if($pos != false)
     	{
         	$sql = substr_replace($sql,"", $pos, 3);
     	}
@@ -158,6 +158,12 @@
 				</div>
 				<ul class="pager">
 				<?php
+					$startpos = strrpos($actual_link, "&start");
+					$startposend = strrpos($actual_link, "&", $startpos+1);
+					if($pos != false)
+			    	{
+			        	$actual_link = substr_replace($actual_link,"", $startpos, $startposend-$startpos);
+			    	}
 					$prevPage = $currPage-10;
 					$prevPage = $prevPage>0?$prevPage:0;
 					$nextPage = $currPage+10;
