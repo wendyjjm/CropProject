@@ -5,7 +5,13 @@
 	
     $optionseng = array("id","crop","germplasm","family","genericname","specificname","originofarea","originofprovince","originofcountry","sourcearea","resoucetype","mainfeature","growthcycle","altitude","longitude","latitude","testlocation","soiltype","ecosystemtype","temperatureavg","rainfallavg","testresult","depositunit","depositresourcetype","depositmethod","entitystatus","sharemethod","collectmethod");	
 	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	
+	// get page
 	$currPage = 0;
+	if(isset($_GET['start'])){
+		$currPage = $_GET['start'];
+	}
+
 	if(isset($_REQUEST['submit']))
 	{
 		//if user click search
@@ -24,23 +30,10 @@
 		}
 		if($conditions != "WHERE "){
 			$sql.=$conditions;
-		}else{
-			$sql.="LIMIT 10";
 		}
-		$pos = strrpos($actual_link, "=");
-		if($pos==(strlen($actual_link)-1))
-		{
-		}
-		else
-		{
-			$currPage = $_REQUEST['start'];
-			$sql.=" OFFSET ".$currPage;			
-		}
-
-		/*if($_REQUEST['start']!=""){
-			$currPage = $_REQUEST['start'];
-			$sql.=" OFFSET ".$currPage;
-		}*/
+		$sql.=" LIMIT 10";
+		$sql.=" OFFSET ".$currPage;
+		
 		$pos = strrpos($sql, "and");
 		
 		if($pos != false)
@@ -61,6 +54,8 @@
 		$result = mysql_query($sql);
 		$actual_link=$actual_link."?";
 	}
+
+
 ?>
 
 
@@ -146,6 +141,7 @@
 									<?php 
 									if($result!=false)
 									{
+
 										display($result);			
 									}
 									?>
@@ -160,14 +156,19 @@
 				<?php
 					$startpos = strrpos($actual_link, "&start");
 					$startposend = strrpos($actual_link, "&", $startpos+1);
-					if($pos != false)
+					if($startpos != false)
 			    	{
-			        	$actual_link = substr_replace($actual_link,"", $startpos, $startposend-$startpos);
+			    		if($startposend==false){
+			    			$actual_link = substr($actual_link, 0, $startpos);
+			    		}else{
+			    			$actual_link = substr_replace($actual_link,"", $startpos, $startposend-$startpos);
+			    		}
 			    	}
 					$prevPage = $currPage-10;
 					$prevPage = $prevPage>0?$prevPage:0;
 					$nextPage = $currPage+10;
 					echo "<li class=\"previous\"><a href=\"".$actual_link."&start=".$prevPage."\">上一页</a></li>";
+					echo $currPage/10;
 					echo "<li class=\"next\"><a href=\"".$actual_link."&start=".$nextPage."\">下一页</a></li>";
 				?>
 				</ul>
@@ -192,7 +193,7 @@
 <?php
 	function display($result)
 	{
-		$option = array("作物名称","种质名称","资源类型","鉴定试验地点","抗旱性鉴定结果","获取途径","详细信息","抗旱鉴定结果");
+		$option = array("ID","作物名称","种质名称","资源类型","鉴定试验地点","抗旱性鉴定结果","获取途径","详细信息","抗旱鉴定结果");
 		echo "<thead><tr>";
 		for($i = 0; $i< count($option); $i++)
 		{
@@ -203,7 +204,7 @@
     	{
     		$crop = $row['crop'];
 
-    		echo "<tr><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['collectmethod']."</td><td>".$row['resoucetype']."</td><td>".$row['testlocation']."</td><td>".$row['testresult']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?crop=".$crop."&id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
+    		echo "<tr><td>".$row['id']."</td><td>".$row['crop']."</td><td>".$row['germplasm']."</td><td>".$row['collectmethod']."</td><td>".$row['resoucetype']."</td><td>".$row['testlocation']."</td><td>".$row['testresult']."</td><td><a href=\"detail.php?id=".$row['id']."\" target=\"_blank\">详细信息</a></td><td><a href=\"experiment.php?crop=".$crop."&id=".$row['id']."\" target=\"_blank\">鉴定结果</a></td></tr>";
     	}
 	}
 ?>
