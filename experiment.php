@@ -40,7 +40,7 @@
 			case '玉米':
 				$sql = "SELECT * FROM yumi WHERE `id`='".$id."'";
 				$result = mysql_query($sql);
-				$tyoe = "yumi";
+				$type = "yumi";
 				break;
 			case '马铃薯':
 				$sql = "SELECT * FROM malingshu WHERE `id`='".$id."'";
@@ -127,8 +127,8 @@
 	      	<!-- sider page -->
 	        <div class="col-sm-3 col-md-2 sidebar">
 	          <ul class="nav nav-sidebar">
-	          	<li><a href="#">项目简介</a></li>
-	            <li class="active"><a href="#">数据库查询 <span class="sr-only">(current)</span></a></li>
+	          	<li><a href="introduction.php">项目简介</a></li>
+	            <li class="active"><a href="crop.php">数据库查询 <span class="sr-only">(current)</span></a></li>
 	            <li><a href="#">联系我们</a></li>
 	          </ul>
 	        </div>
@@ -194,8 +194,8 @@
 		{	
 			case "xiaomai":
 				$option = array("ID","作物名称","种质名称","抗旱系数","抗旱指数","全生育期抗旱性","相对芽长","相对芽长抗旱性","相对芽鞘长","相对芽鞘抗旱性","相对发芽势","相对发芽势抗旱性","相对根长","相对根长抗旱性","相对根数","相对根数抗旱性","相对发芽率","相对发芽率抗旱性","相对芽干重","相对芽干重抗旱性","相对根干重","相对根干重抗旱性","总级别","综合评价");
-				$optionseng = array("id","crop","germplasm","xishu","zhishu","quanshengyuqi","relativesprout","levelbaseonsprout","relativesproutlength","levelbaseonsproutlength","relativegermination","levelbaseongermination","relativegermination","levelbaseongermination","relativerootlength","levelbaseonrootlength","relativerootno","levelbaseonrootno","relativegerminationrate","levelbaseongerminationrate","relativesproutweight","levelbaseonsproutweight","relativerootweight","levelbaseonrootweight","level","zonghepingjia");
-				break;
+				$optionseng = array("id","crop","germplasm","xishu","zhishu","quanshengyuqi","relativesprout","levelbaseonsprout","relativesproutlength","levelbaseonsproutlength","relativegermination","levelbaseongermination","relativerootlength","levelbaseonrootlength","relativerootno","levelbaseonrootno","relativegerminationrate","levelbaseongerminationrate","relativesproutweight","levelbaseonsproutweight","relativerootweight","levelbaseonrootweight","level","zonghepingjia");
+				break;				
 			case "handao":
 				$option = array("ID","作物名称","种质名称","相对芽长","相对芽长抗旱性","相对芽鞘长","相对芽鞘抗旱性","相对根长","相对根长抗旱性","相对根数","相对根数抗旱性","相对发芽率","相对发芽率抗旱性","相对芽干重","相对芽干重抗旱性","相对根干重","相对根干重抗旱性","总级别","综合评价");
 				$optionseng = array("id","crop","zhongzhi","relativesprout","levelbaseonsprout","relativesproutlength","levelbaseonsproutlength","relativerootlength","levelbaseonrootlength","relativerootno","levelbaseonrootno","relativegerminationrate","levelbaseongerminationrate","relativesproutweight","levelbaseonsproutweight","relativerootweight","levelbaseonrootweight","level","levelbaseonlevel");

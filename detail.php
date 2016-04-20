@@ -59,8 +59,8 @@
 	      	<!-- sider page -->
 	        <div class="col-sm-3 col-md-2 sidebar">
 	          <ul class="nav nav-sidebar">
-	          	<li><a href="#">项目简介</a></li>
-	            <li class="active"><a href="#">数据库查询 <span class="sr-only">(current)</span></a></li>
+	          	<li><a href="introduction.php">项目简介</a></li>
+	            <li class="active"><a href="crop.php">数据库查询 <span class="sr-only">(current)</span></a></li>
 	            <li><a href="#">联系我们</a></li>
 	          </ul>
 	        </div>

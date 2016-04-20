@@ -81,7 +81,7 @@ body {
   }
 }
 .main .page-header {
-  margin-top: 0;
+  margin-top: 20px;
 }
 
 
@@ -102,4 +102,12 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.blog ol {
+	line-height: 2;
+}
+
+.blog p {
+	text-indent: 28px;
 }

@@ -99,8 +99,8 @@
 	      	<!-- sider page -->
 	        <div class="col-sm-3 col-md-2 sidebar">
 	          <ul class="nav nav-sidebar">
-	          	<li><a href="#">项目简介</a></li>
-	            <li class="active"><a href="#">数据库查询 <span class="sr-only">(current)</span></a></li>
+	          	<li><a href="introduction.php">项目简介</a></li>
+	            <li class="active"><a href="crop.php">数据库查询 <span class="sr-only">(current)</span></a></li>
 	            <li><a href="#">联系我们</a></li>
 	          </ul>
 	        </div>
@@ -193,7 +193,7 @@
 <?php
 	function display($result)
 	{
-		$option = array("ID","作物名称","种质名称","资源类型","鉴定试验地点","抗旱性鉴定结果","获取途径","详细信息","抗旱鉴定结果");
+		$option = array("ID","作物名称","种质名称","资源类型","鉴定试验地点","获取途径","详细信息","抗旱性鉴定结果");
 		echo "<thead><tr>";
 		for($i = 0; $i< count($option); $i++)
 		{
